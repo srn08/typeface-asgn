@@ -99,6 +99,73 @@ def search_restaurants(lat: float, lon: float, radius: float = 3, page: int = Qu
         "current_page": page
     }
 
+class NameRequest(BaseModel):
+    restaurant_name: str
+
+@app.post("/search-name")
+async def search_name(
+    request: NameRequest,
+    page: int = Query(1, alias="page", description="Page number"),
+    per_page: int = Query(10, alias="per_page", description="Number of results per page")
+):
+    """
+    Search for restaurants where the 'restaurant_name' is similar (case-insensitive) 
+    to the provided name, with pagination support.
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Case-insensitive search using LOWER()
+        search_query = f"%{request.restaurant_name.lower()}%"
+        
+        # Get total count for pagination
+        count_query = """
+            SELECT COUNT(*) FROM restaurants 
+            WHERE LOWER(restaurant_name) LIKE ?
+        """
+        cursor.execute(count_query, (search_query,))
+        total_count = cursor.fetchone()[0]
+
+        # Calculate pagination values
+        offset = (page - 1) * per_page
+        total_pages = math.ceil(total_count / per_page)
+
+        # Fetch paginated results
+        query = """
+            SELECT * FROM restaurants 
+            WHERE LOWER(restaurant_name) LIKE ?
+            LIMIT ? OFFSET ?
+        """
+        cursor.execute(query, (search_query, per_page, offset))
+        results = cursor.fetchall()
+        conn.close()
+
+        # Convert results to list of dictionaries
+        restaurants = [dict(row) for row in results]
+
+        if not restaurants:
+            return {
+                "message": "No restaurants found",
+                "cuisine": request.restaurant_name,
+                "restaurants": [],
+                "total_pages": total_pages,
+                "current_page": page
+            }
+
+        return {
+            "message": "Restaurants found",
+            "cuisine": request.restaurant_name,
+            "restaurants": restaurants,
+            "total_pages": total_pages,
+            "current_page": page
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
 # Request model for handling image URLs
 class ImageRequest(BaseModel):
     image_url: str
