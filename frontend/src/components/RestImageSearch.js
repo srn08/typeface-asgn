@@ -10,6 +10,27 @@ export function RestImageSearch() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const handleImageUpload = async (event) => {
+        const file = event.target.files[0];
+        if(!file) return;
+
+        const data = new FormData();
+        data.append("file",file);
+        data.append("upload_preset", "file_upload");
+        data.append("cloud_name", "dh1utfhob");
+
+        const res = await fetch("https://api.cloudinary.com/v1_1/dh1utfhob/image/upload", {
+            method:"POST",
+            body: data
+        }).catch((error) => {
+            console.log(error);
+        })
+
+        const uploadedImageURL = await res.json();
+        setImageUrl(uploadedImageURL.url);
+    }
+
+
     const searchByImage = () => {
         if (!imageUrl.trim()) {
             setError("Image URL is required.");
@@ -48,11 +69,11 @@ export function RestImageSearch() {
 
             <div className="search-box">
                 <input 
-                    type="text"
+                    type="file"
                     className="input-field" 
-                    placeholder="Enter Image URL" 
-                    value={imageUrl} 
-                    onChange={(e) => setImageUrl(e.target.value)} 
+                    accept='image/'
+                    onChange={handleImageUpload}
+                    // onChange={(e) => setImageUrl(e.target.value)} 
                 />
                 <button onClick={searchByImage} className="search-btn">Search</button>
             </div>
