@@ -33,7 +33,7 @@ export function RestImageSearch() {
 
     const searchByImage = () => {
         if (!imageUrl.trim()) {
-            setError("Image URL is required.");
+            setError("Wait for a few seconds, your image is being processed and the press the search button again");
             return;
         }
 

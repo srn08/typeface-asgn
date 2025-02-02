@@ -15,14 +15,20 @@ export function RestaurantList() {
     const perPage = 12;
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
 
     useEffect(() => {
+        if (!isSearching) {
+            fetchRestaurants(page);
+        }
+    }, [page, isSearching]);
+
+    const fetchRestaurants = (currentPage) => {
         setLoading(true);
-        fetch(`${API_BASE}/restaurants?page=${page}&per_page=${perPage}`)
+        fetch(`${API_BASE}/restaurants?page=${currentPage}&per_page=${perPage}`)
             .then(res => {
-                if (!res.ok) {
-                    throw new Error("Failed to fetch restaurants");
-                }
+                if (!res.ok) throw new Error("Failed to fetch restaurants");
                 return res.json();
             })
             .then(data => {
@@ -30,14 +36,48 @@ export function RestaurantList() {
                     setRestaurants(data.data);
                     setTotalPages(data.total_pages || 1);
                     localStorage.setItem('restaurantList', JSON.stringify(data.data));
-                    localStorage.setItem('currentPage', page);
+                    localStorage.setItem('currentPage', currentPage);
                 } else {
                     throw new Error("Invalid API response");
                 }
             })
             .catch(err => setError(err.message))
             .finally(() => setLoading(false));
-    }, [page]);
+    };
+
+    const handleSearch = () => {
+        if (!searchQuery.trim()) {
+            setIsSearching(false);
+            fetchRestaurants(page);
+            return;
+        }
+    
+        setIsSearching(true);
+        setLoading(true);
+    
+        fetch(`${API_BASE}/search-name`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ restaurant_name: searchQuery }) // ✅ Correct key
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to fetch restaurants");
+            return res.json();
+        })
+        .then(data => {
+            if (data && data.restaurants) { // ✅ Correct key for restaurant list
+                setRestaurants(data.restaurants);
+                setTotalPages(1); // No pagination when searching
+            } else {
+                throw new Error("Invalid API response");
+            }
+        })
+        .catch(err => setError(err.message))
+        .finally(() => setLoading(false));
+    };
+    
 
     const handlePageClick = (data) => {
         let currentPage = data.selected + 1;
@@ -50,7 +90,19 @@ export function RestaurantList() {
 
     return (
         <div className="container">
+            <div className="search-box">
+                <input
+                    type="text"
+                    className="input-field"
+                    placeholder="Search restaurant by name..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button onClick={handleSearch} className="search-btn">Search</button>
+            </div>
+
             <h1 className="text-center my-4">Restaurants</h1>
+
             <div className="row">
                 {restaurants.length > 0 ? (
                     restaurants.map((restaurant) => (
@@ -60,7 +112,8 @@ export function RestaurantList() {
                     <p className="text-center">No restaurants found.</p>
                 )}
             </div>
-            {totalPages > 1 && (
+
+            {!isSearching && totalPages > 1 && (
                 <div className="pagination-container">
                     <ReactPaginate
                         previousLabel={'<'}

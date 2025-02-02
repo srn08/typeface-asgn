@@ -113,7 +113,7 @@ export function RestaurantSearch() {
                 setLat(position.coords.latitude.toFixed(6));
                 setLon(position.coords.longitude.toFixed(6));
             },
-            () => setError("Unable to retrieve location.")
+            () => setError("Location detection does not work over http, run the app locally to test this feature.")
         );
     };
 

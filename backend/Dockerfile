@@ -14,11 +14,8 @@ RUN pip install clarifai==2.6.2
 # Copy the rest of the application
 COPY . .
 
-# Copy the database file from parent directory
-COPY ./zomato.db .
-
 # Expose port 8000
 EXPOSE 8000
 
 # Command to run the application
-CMD ["uvicorn", "fastapi_restaurants:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
