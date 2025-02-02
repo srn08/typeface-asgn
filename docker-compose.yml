@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: restaurant-backend
+    build: 
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - restaurant-network
+
+  frontend:
+    container_name: restaurant-frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - restaurant-network
+
+networks:
+  restaurant-network:
+    driver: bridge
