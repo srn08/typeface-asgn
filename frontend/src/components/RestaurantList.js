@@ -3,8 +3,7 @@ import ReactPaginate from 'react-paginate';
 import './Navbar.css';
 import RestaurantCard from './RestaurantCard';
 import './RestaurantCard.css';
-
-const API_BASE = 'http://localhost:8000';
+import API_BASE from '../url';
 
 export function RestaurantList() {
     const [restaurants, setRestaurants] = useState([]);

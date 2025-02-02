@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaPhoneAlt, FaMapMarkerAlt, FaShareAlt, FaCommentDots } from 'react-icons/fa';
 import './RestaurantDetail.css';
-
-const API_BASE = 'http://localhost:8000';
+import API_BASE from '../url';
 
 export function RestaurantDetail() {
     const { id } = useParams();

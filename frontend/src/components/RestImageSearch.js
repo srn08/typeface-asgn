@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import './RestaurantSearch.css';
 import RestaurantCard from './RestaurantCard';
-
-const API_BASE = 'http://localhost:8000';
+import API_BASE from '../url';
 
 export function RestImageSearch() {
     const [imageUrl, setImageUrl] = useState('');

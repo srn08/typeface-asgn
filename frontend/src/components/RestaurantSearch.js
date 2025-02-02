@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './RestaurantSearch.css';
 import RestaurantCard from './RestaurantCard';
 import ReactPaginate from 'react-paginate';
-
-const API_BASE = 'http://localhost:8000';
+import API_BASE from '../url';
 
 export function RestaurantSearch() {
     const [lat, setLat] = useState(localStorage.getItem('lat') || '');
