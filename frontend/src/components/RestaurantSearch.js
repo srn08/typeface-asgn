@@ -101,6 +101,22 @@ export function RestaurantSearch() {
         search(data.selected + 1);
     };
 
+    const useMyLocation = () => {
+        if (!navigator.geolocation) {
+            setError("Geolocation is not supported by your browser.");
+            return;
+        }
+
+        setError("");
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setLat(position.coords.latitude.toFixed(6));
+                setLon(position.coords.longitude.toFixed(6));
+            },
+            () => setError("Unable to retrieve location.")
+        );
+    };
+
     return (
         <div className="container search-container">
             <h1>Search Restaurants</h1>
@@ -128,6 +144,7 @@ export function RestaurantSearch() {
                     onChange={(e) => setRadius(e.target.value)}
                 />
                 <button onClick={() => search(1)} className="search-btn">Search</button>
+                <button onClick={useMyLocation} className="search-btn">Use My Location</button>
             </div>
 
             {error && <p className="error-msg">{error}</p>}
