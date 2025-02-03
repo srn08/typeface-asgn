@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
-
-import RestaurantList from './components/RestaurantList';
+import RestaurantList from './Pages/RestaurantList';
+import { RestaurantSearch } from './Pages/RestaurantSearch';
+import RestImageSearch from './Pages/RestImageSearch';
 import { RestaurantDetail } from './components/RestaurantDetail';
-import { RestaurantSearch } from './components/RestaurantSearch';
 import Navbar from './components/Navbar';
-import RestImageSearch from './components/RestImageSearch';
+
 
 const App = () => {
     return (

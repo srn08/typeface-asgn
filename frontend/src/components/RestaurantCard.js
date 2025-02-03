@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './RestaurantCard.css';
+import '../Styles/RestaurantCard.css';
 
 const RestaurantCard = ({ restaurant }) => {
     return (
@@ -9,6 +9,7 @@ const RestaurantCard = ({ restaurant }) => {
                 <div className="restaurant-card">
                     <div className="restaurant-info">
                         <h5>{restaurant.restaurant_name}</h5>
+                        <p>{restaurant.locality_verbose}</p>
                         <p className="cuisine">{restaurant.cuisines}</p>
                         <div className="restaurant-details">
                             <span className="price">{restaurant.average_cost_for_two} {" "+restaurant.currency} for two</span>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import './RestaurantSearch.css';
-import RestaurantCard from './RestaurantCard';
+import '../Styles/RestaurantSearch.css';
+import RestaurantCard from '../components/RestaurantCard';
 import ReactPaginate from 'react-paginate';
 import API_BASE from '../url';
 

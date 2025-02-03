@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import './Navbar.css';
-import RestaurantCard from './RestaurantCard';
-import './RestaurantCard.css';
+import '../Styles/Navbar.css';
+import RestaurantCard from '../components/RestaurantCard';
+import '../Styles/RestaurantCard.css';
 import API_BASE from '../url';
 
 export function RestaurantList() {
@@ -90,6 +90,7 @@ export function RestaurantList() {
 
     return (
         <div className="container">
+            <br/>
             <div className="search-box">
                 <input
                     type="text"

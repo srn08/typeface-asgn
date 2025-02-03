@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './RestaurantSearch.css';
-import RestaurantCard from './RestaurantCard';
+import '../Styles/RestaurantSearch.css';
+import RestaurantCard from '../components/RestaurantCard';
 import API_BASE from '../url';
 
 export function RestImageSearch() {
@@ -33,7 +33,7 @@ export function RestImageSearch() {
 
     const searchByImage = () => {
         if (!imageUrl.trim()) {
-            setError("Wait for a few seconds, your image is being processed and the press the search button again");
+            setError("Too Soon! Wait for a second and then press the Search button again");
             return;
         }
 

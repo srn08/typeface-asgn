@@ -130,7 +130,7 @@ cuisines = {
     "Mughlai": ["biryani", "korma", "tandoori"],
     "North Indian": ["dal makhani", "paneer", "butter chicken"],
     "Pakistani": ["biryani", "nihari", "korma"],
-    "Pizza": ["pepperoni", "cheese", "crust"],
+    "Pizza": ["pizza","pepperoni", "cheese", "crust"],
     "Seafood": ["fish", "shrimp", "lobster"],
     "South Indian": ["dosa", "idli", "sambar"],
     "Spanish": ["paella", "tapas", "churros"],
