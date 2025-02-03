@@ -12,15 +12,15 @@ export function RestImageSearch() {
 
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
-        if(!file) return;
+        if (!file) return;
 
         const data = new FormData();
-        data.append("file",file);
+        data.append("file", file);
         data.append("upload_preset", "file_upload");
         data.append("cloud_name", "dh1utfhob");
 
         const res = await fetch("https://api.cloudinary.com/v1_1/dh1utfhob/image/upload", {
-            method:"POST",
+            method: "POST",
             body: data
         }).catch((error) => {
             console.log(error);
@@ -47,20 +47,20 @@ export function RestImageSearch() {
             },
             body: JSON.stringify({ image_url: imageUrl })
         })
-        .then(res => {
-            if (!res.ok) throw new Error("Failed to fetch restaurants");
-            return res.json();
-        })
-        .then(data => {
-            if (data && data.cuisine) {
-                setCuisine(data.cuisine);
-                setRestaurants(data.restaurants || []);
-            } else {
-                throw new Error("Invalid API response");
-            }
-        })
-        .catch(() => setError("Failed to fetch data."))
-        .finally(() => setLoading(false));
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to fetch restaurants");
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.cuisine) {
+                    setCuisine(data.cuisine);
+                    setRestaurants(data.restaurants || []);
+                } else {
+                    throw new Error("Invalid API response");
+                }
+            })
+            .catch(() => setError("Failed to fetch data."))
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -68,12 +68,12 @@ export function RestImageSearch() {
             <h1>Search Restaurants by Image</h1>
 
             <div className="search-box">
-                <input 
+                <input
                     type="file"
-                    className="input-field" 
+                    className="input-field"
                     accept='image/'
                     onChange={handleImageUpload}
-                    // onChange={(e) => setImageUrl(e.target.value)} 
+                // onChange={(e) => setImageUrl(e.target.value)} 
                 />
                 <button onClick={searchByImage} className="search-btn">Search</button>
             </div>
@@ -85,7 +85,7 @@ export function RestImageSearch() {
             ) : (
                 <>
                     {cuisine && <h3 className="cuisine-text">Cuisine: {cuisine}</h3>}
-                    
+
                     <div className="row">
                         {restaurants.length > 0 ? (
                             restaurants.map(restaurant => (

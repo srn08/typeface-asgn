@@ -6,6 +6,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import '../Styles/RestaurantDetail.css';
 import API_BASE from '../url';
 
+// Page that shows all of the information about a Restaurant
 export function RestaurantDetail() {
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState(null);

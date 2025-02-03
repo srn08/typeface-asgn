@@ -51,33 +51,33 @@ export function RestaurantList() {
             fetchRestaurants(page);
             return;
         }
-    
+
         setIsSearching(true);
         setLoading(true);
-    
+
         fetch(`${API_BASE}/search-name`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ restaurant_name: searchQuery }) // ✅ Correct key
+            body: JSON.stringify({ restaurant_name: searchQuery })
         })
-        .then(res => {
-            if (!res.ok) throw new Error("Failed to fetch restaurants");
-            return res.json();
-        })
-        .then(data => {
-            if (data && data.restaurants) { // ✅ Correct key for restaurant list
-                setRestaurants(data.restaurants);
-                setTotalPages(1); // No pagination when searching
-            } else {
-                throw new Error("Invalid API response");
-            }
-        })
-        .catch(err => setError(err.message))
-        .finally(() => setLoading(false));
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to fetch restaurants");
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.restaurants) {
+                    setRestaurants(data.restaurants);
+                    setTotalPages(1);
+                } else {
+                    throw new Error("Invalid API response");
+                }
+            })
+            .catch(err => setError(err.message))
+            .finally(() => setLoading(false));
     };
-    
+
 
     const handlePageClick = (data) => {
         let currentPage = data.selected + 1;
@@ -90,7 +90,7 @@ export function RestaurantList() {
 
     return (
         <div className="container">
-            <br/>
+            <br />
             <div className="search-box">
                 <input
                     type="text"

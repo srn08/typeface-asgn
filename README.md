@@ -60,7 +60,7 @@ A **Full-Stack Web Application** built with **React (Frontend) & FastAPI (Backen
 - Works across **different environments without dependency issues**.
 
 ### 📌 **6. 🚀 Deployed on Azure**
-- If setting up locally isn't possible, you can access the app via `http://typeface-asgn.centralindia.cloudapp.azure.com:3000/`.
+- If setting up locally isn't possible, you can access the app via `http://typeface-asgn.centralindia.cloudapp.azure.com/`.
 - Runs **FastAPI backend** & **React frontend** seamlessly in the cloud.
 
 ---

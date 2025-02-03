@@ -19,11 +19,22 @@ RUN npm run build
 # Use Nginx to serve the built app
 FROM nginx:alpine
 
+# Set working directory
+WORKDIR /usr/share/nginx/html
+
+# Remove default Nginx static files
+RUN rm -rf ./*
+
 # Copy the built React app to Nginx's default static directory
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/build .
+
+# Copy custom Nginx configuration for handling SPA routes
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 for Nginx
 EXPOSE 80
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]
+
+

@@ -81,7 +81,7 @@ export function RestaurantSearch() {
                     setRestaurants(data.data);
                     setTotalPages(data.total_pages || 1);
                     setPage(newPage);
-                    
+
                     // Store search results and state
                     localStorage.setItem('restaurants', JSON.stringify(data.data));
                     localStorage.setItem('totalPages', data.total_pages || 1);
@@ -122,21 +122,21 @@ export function RestaurantSearch() {
             <h1>Search Restaurants</h1>
 
             <div className="search-box">
-                <input 
+                <input
                     type="text"
-                    className="input-field" 
-                    placeholder="Enter Latitude" 
-                    value={lat} 
-                    onChange={(e) => setLat(e.target.value)} 
+                    className="input-field"
+                    placeholder="Enter Latitude"
+                    value={lat}
+                    onChange={(e) => setLat(e.target.value)}
                 />
-                <input 
+                <input
                     type="text"
-                    className="input-field" 
-                    placeholder="Enter Longitude" 
-                    value={lon} 
-                    onChange={(e) => setLon(e.target.value)} 
+                    className="input-field"
+                    placeholder="Enter Longitude"
+                    value={lon}
+                    onChange={(e) => setLon(e.target.value)}
                 />
-                <input 
+                <input
                     type="text"
                     className="input-field"
                     placeholder="Enter Radius in km"
