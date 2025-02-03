@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/ef3f0625-2a6a-4f5b-b53c-6eac6835ccf8
 
 ### **🚀 Restaurant Finder Web App**
 
-A **Full-Stack Web Application** built with **React (Frontend) & FastAPI (Backend)** using **SQLite Database**, containerized with **Docker**. This app allows users to:  
+A **Full-Stack Web Application** built with **React (Frontend) & FastAPI (Backend)** using **SQLite Database**, containerized with **Docker**,and deployed on **Azure**. This app allows users to:  
 ✅ **Browse restaurants with pagination**  
 ✅ **Search restaurants within a radius of a location**  
 ✅ **Find restaurants by name**  
@@ -59,6 +59,10 @@ A **Full-Stack Web Application** built with **React (Frontend) & FastAPI (Backen
 - The entire app runs in **Docker containers** for easy deployment.
 - Works across **different environments without dependency issues**.
 
+### 📌 **6. 🚀 Deployed on Azure**
+- If setting up locally isn't possible, you can access the app via `http://typeface-asgn.centralindia.cloudapp.azure.com:3000/`.
+- Runs **FastAPI backend** & **React frontend** seamlessly in the cloud.
+
 ---
 
 ## **🛠️ Tech Stack**
@@ -77,4 +81,6 @@ A **Full-Stack Web Application** built with **React (Frontend) & FastAPI (Backen
 - **Clarifai API** for cuisine recognition from images
 - **Cloudinary API** for temporary image hosting
 
-### **Docker 🐳**
+### **Deployment 🌍**
+- **Docker**🐳 for containerization
+- **Azure** for cloud hosting
